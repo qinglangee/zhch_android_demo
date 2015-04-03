@@ -151,7 +151,10 @@ android {
     }
 }
 */
-
+task copyDependencies(type: Copy) {
+   from configurations.compile
+   into 'libs'
+}
 // runAndroidApplication
 task run (type: Exec, dependsOn: ':installDebug') << {
 	//TODO update Activity name below or find a way to get it from AndroidManifest.xml

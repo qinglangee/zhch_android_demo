@@ -25,3 +25,12 @@ proguard/
 
 # Log Files
 *.log
+
+# Eclipse generated config files
+.classpath
+.project
+project.properties
+.settings/
+
+# libs only used for eclipse import
+libs/
