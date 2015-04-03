@@ -1,0 +1,4 @@
+include ':supportv7'
+include ':pulltorefreshlibrary'
+project(':supportv7').projectDir = new File(settingsDir, '../../workspace_android/appcompat_v7')
+project(':pulltorefreshlibrary').projectDir = new File(settingsDir, '../../workspace_android/pulltorefreshlibrary')
