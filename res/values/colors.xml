@@ -8,54 +8,61 @@
     <color name="black">#000000</color>
     
     <!-- 应用主要颜色 -->
-    <color name="app_main">#f06aac</color>
-    <!-- 边框颜色 -->
+    <color name="app_main">#AD1B20</color>
+    <color name="app_main_sel">@color/black</color>
+    
+    <!-- 背景颜色 -->
     <!-- 
-    	border_main  主要边框颜色(最多的)
-    	border_sub   次要边框颜色(第二多的)
-    	border_separator  分隔线颜色
-     -->
-    <color name="border_main">@color/app_main</color>
-    <color name="border_sub">#F2F2F2</color>
-    <color name="border_separator">#DDDDDD</color>
-    <!-- 背景颜色  -->
-    <!-- 
-    	bg_main             最下层背景
-    	bg_sub_item         条目/列表 等背景
-    	bg_main_light       主色调的较浅的背景
     	bg_header           头部背景
-    	bg_header_selected  头部选中时的反色
-    	bg_selected_main    其它主要选中时的反色
-    	bg_btn_main         主要的按钮颜色
-    	bg_btn_01           其它按钮颜色01
-    	bg_btn_01_selected  其它按钮颜色01的选中色
-     -->
-    <color name="bg_main">#FFFFFF</color>
-    <color name="bg_sub_item">#F2F2F2</color>
-    <color name="bg_main_light">#e6aa96</color>
-    <color name="bg_header">#ffe8e0</color>
-    <color name="bg_header_selected">#ffefea</color>
-    <color name="bg_selected_main">@color/bg_header_selected</color>
+    	bg_btn_main         按钮背景
+    -->
+    <color name="bg_header">@color/app_main</color>
     <color name="bg_btn_main">@color/app_main</color>
-    <color name="bg_btn_01">@color/bg_header_selected</color>
-    <color name="bg_btn_01_selected">@color/bg_header</color>
+    
+    
     <!-- 文字颜色 -->
     <!-- 
-    	text_color_deep     内容深颜色文字
-    	text_color_light    内容浅颜色文字
-    	text_header         头部标题
-    	text_title          其它标题
-    	text_title_option   标题副颜色 
-    	text_selected_main  选中时的颜色
-    	text_in_mian_light  背景是bg_main_light中的文字颜色
+    	text_header            头部标题
+    	text_btn_main          按钮文字
+    	text_main              白底的主要文字颜色
+    	text_sub               白底的次要文字
+    	text_main_deep         深色背景主要文字颜色
+    	text_sub_deep          深色背景次要文字
+    	text_timeline          时间轴文字
+    	text_timeline_sub      时间轴文字二级颜色
+    	text_commission        品委会文字
+    	text_commission_sub    品委会文字二级颜色
+    	text_menu              菜单页文字
     -->
-    <color name="text_color_deep">#666666</color>
-    <color name="text_color_light">#999999</color>
-    <color name="text_lighter">#bbbbbb</color>
-    <color name="text_header">#333333</color>
-    <color name="text_title">@color/text_header</color>
-    <color name="text_title_option">#f06aac</color>
-    <color name="text_selected_main">@color/white</color>
-    <color name="text_in_mian_light">@color/white</color>
+    <color name="text_header">@color/white</color>
+    <color name="text_btn_main">@color/white</color>
+    <color name="text_main">@color/black</color>
+    <color name="text_sub">#999999</color>
+    <color name="text_main_deep">@color/white</color>
+    <color name="text_sub_deep">#929292</color>
+    <color name="text_timeline">@color/text_main_deep</color>
+    <color name="text_timeline_sub">@color/text_sub_deep</color>
+    <color name="text_commission">@color/text_main</color>
+    <color name="text_commission_sub">@color/text_sub</color>
+    <color name="text_menu">@color/white</color>
+    <color name="text_menu_sub">@color/border_main_in_deep</color>
+    
+    
+    
+    <!-- 边框颜色 -->
+    <!-- 
+    	border_avatar              头像边框颜色
+    	border_separator_in_deep   深色底分隔线
+    	border_separator_in_light  浅色底分隔线
+    	border_main_in_deep        深色底主要边框颜色
+    	border_main_in_light       浅色底主要边框颜色
+     -->
+    <color name="border_avatar">@color/app_main</color>
+    <color name="border_separator_in_deep">#333333</color>
+    <color name="border_separator_in_light">#F2F2F2</color>
+    <color name="border_main_in_deep">#999999</color>
+    <color name="border_main_in_light">@color/border_separator_in_light</color>
+    
+    
     
 </resources>

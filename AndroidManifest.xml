@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zhch.andex" android:versionCode="1" android:versionName="1.0" >
-    <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="21" />
-    
+    package="com.zhch.andex"
+    android:versionCode="1"
+    android:versionName="1.0" >
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="21" />
+    <!-- 访问网络 , 网络/WIFI 状态 -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- GPS 地点数据 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
-    
+    <!-- 写文件 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -25,7 +30,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".pulltorefresh.PullLoadImageAct"  android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+        <activity
+            android:name=".pulltorefresh.PullLoadImageAct"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
         <activity android:name=".activitydemo.LifeCycleDemo" />
+        <activity
+            android:name="com.zhch.andex.activitydemo.ActionBarDemo"
+            android:label="@string/title_activity_action_bar_demo" 
+            android:theme="@style/CustomActionBarTheme">
+        </activity>
+        <activity android:name=".drawer.DrawerDemo" />
     </application>
 </manifest>

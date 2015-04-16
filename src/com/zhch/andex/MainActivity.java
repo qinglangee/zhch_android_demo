@@ -3,11 +3,12 @@ package com.zhch.andex;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.zhch.andex.activitydemo.ActionBarDemo;
 import com.zhch.andex.activitydemo.LifeCycleDemo;
+import com.zhch.andex.drawer.DrawerDemo;
 
 public class MainActivity extends Activity {
 
@@ -18,14 +19,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		button1 = (Button) findViewById(R.id.button1);
-//		button1.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				toLifeCycleDemo(v);
-//				
-//			}
-//		});
 	}
 
 	/**
@@ -35,8 +28,15 @@ public class MainActivity extends Activity {
 	 * @param view
 	 */
 	public void toLifeCycleDemo(View view) {
-		Log.d("zhch", "hahaha");
 		Intent intent = new Intent(this, LifeCycleDemo.class);
+		startActivity(intent);
+	}
+	public void toActionBarDemo(View view) {
+		Intent intent = new Intent(this, ActionBarDemo.class);
+		startActivity(intent);
+	}
+	public void toActionBarDemo2(View view) {
+		Intent intent = new Intent(this, DrawerDemo.class);
 		startActivity(intent);
 	}
 
