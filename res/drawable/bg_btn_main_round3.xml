@@ -2,7 +2,7 @@
 <!-- 主色的背景，四个角有倒角 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
     <solid android:color="@color/app_main" />
-    <corners android:radius="4dp" />
+    <corners android:radius="3dp" />
     <padding
         android:bottom="1dp"
         android:left="1dp"

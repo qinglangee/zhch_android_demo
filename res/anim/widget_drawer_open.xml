@@ -5,8 +5,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:duration="500"
         android:propertyName="x"
-        android:valueFrom="0"
-        android:valueTo="600"
+        android:valueTo="220dp"
         android:valueType="floatType" />
 
 </set>

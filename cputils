@@ -25,7 +25,19 @@ for file in ${srcs[@]};do
 done
 
 # copy res
-res=()
+res=("anim/widget_drawer_close.xml"
+"anim/widget_drawer_open.xml"
+"drawable/selector_btn_main.xml"
+"drawable/border_in_deep.xml"
+"drawable/border_in_deep_round3.xml"
+"drawable/border_circle_gray.xml"
+"drawable/bg_btn_main_round3.xml"
+"drawable/bg_btn_main_round3_selected.xml"
+)
+mkdir  -p $destDir/res/anim  $destDir/res/drawable  $destDir/res/layout  $destDir/res/values 
+for file in ${res[@]}; do
+    cp $srcDir/res/$file  $destDir/res/$file
+done
 
 
 sed -i "s/com.lifeix.pintimes/com.zhch.andex/g" `grep "com.lifeix.pintimes" -rl $destDir`
