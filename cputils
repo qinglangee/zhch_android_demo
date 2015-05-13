@@ -1,0 +1,27 @@
+#! /bin/bash
+srcDir="/home/lifeix/workspace/lifeix-pintimes-android"
+destDir=/home/lifeix/temp/d3/move
+srcPre="src/com/lifeix/pintimes"
+
+# 建立目录, 清空内容
+if [ -e "$destDir" ] ;then 
+    rm -r $destDir/*
+else
+    mkdir  $destDir
+fi
+
+# coopy 源文件
+srcs=("widget/drawerbox/DrawerBox.java"
+"widget/drawerbox/TouchDisableView.java"
+)
+for file in ${srcs[@]};do
+    destFile=$destDir/$srcPre/$file
+    temp=`dirname "$destFile"`
+    if [ ! -e $temp ] ; then
+        mkdir -p $temp
+    fi
+    cp $srcDir/$srcPre/$file $destFile
+done
+
+# copy res
+res=()

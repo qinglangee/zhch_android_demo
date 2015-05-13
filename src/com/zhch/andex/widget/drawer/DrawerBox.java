@@ -1,11 +1,15 @@
 package com.zhch.andex.widget.drawer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,7 +19,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.zhch.andex.R;
-
 
 public class DrawerBox extends FrameLayout {
 
@@ -46,6 +49,10 @@ public class DrawerBox extends FrameLayout {
 	private float lastActionDownX, lastActionDownY;
 	private float pressedX = 0;
 
+	/** Views which need stop to intercept touch events. */
+	private List<View> ignoredViews;
+	private boolean isInIgnoredView = false;
+
 	public DrawerBox(Context context) {
 		super(context);
 		this.setBackgroundColor(getResources().getColor(R.color.black));
@@ -72,6 +79,7 @@ public class DrawerBox extends FrameLayout {
 		this.activity = activity;
 		viewDecor = (ViewGroup) activity.getWindow().getDecorView();
 		viewActivity = new TouchDisableView(this.activity);
+		ignoredViews = new ArrayList<View>();
 
 		View first = viewDecor.getChildAt(0);
 		viewDecor.removeViewAt(0);
@@ -99,11 +107,16 @@ public class DrawerBox extends FrameLayout {
 		case MotionEvent.ACTION_DOWN:
 			lastActionDownX = ev.getX();
 			lastActionDownY = ev.getY();
+			isInIgnoredView = isInIgnoredView(ev) && !isOpened;
 			pressedState = PRESSED_DOWN;
+
 			pressedX = viewActivity.getX();
+
 			break;
 
 		case MotionEvent.ACTION_MOVE:
+			if (isInIgnoredView)
+				break;
 
 			if (pressedState != PRESSED_DOWN && pressedState != PRESSED_MOVE_HORIZONTAL)
 				break;
@@ -133,6 +146,10 @@ public class DrawerBox extends FrameLayout {
 			break;
 
 		case MotionEvent.ACTION_UP:
+
+			if (isInIgnoredView)
+				break;
+
 			if (pressedState != PRESSED_MOVE_HORIZONTAL)
 				break;
 
@@ -157,34 +174,35 @@ public class DrawerBox extends FrameLayout {
 		return super.dispatchTouchEvent(ev);
 	}
 
-    private OnClickListener viewActivityOnClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (isOpened) closeMenu();
-        }
-    };
+	private OnClickListener viewActivityOnClickListener = new OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			if (isOpened)
+				closeMenu();
+		}
+	};
 
-    private Animator.AnimatorListener animationListener = new AnimatorListenerAdapter() {
+	private Animator.AnimatorListener animationListener = new AnimatorListenerAdapter() {
 
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            if(isOpened){
-                viewActivity.setTouchDisable(true);
-                viewActivity.setOnClickListener(viewActivityOnClickListener);
-            }else{
-                viewActivity.setTouchDisable(false);
-                viewActivity.setOnClickListener(null);
-            }
-        }
-    };
-	
+		@Override
+		public void onAnimationEnd(Animator animation) {
+			if (isOpened) {
+				viewActivity.setTouchDisable(true);
+				viewActivity.setOnClickListener(viewActivityOnClickListener);
+			} else {
+				viewActivity.setTouchDisable(false);
+				viewActivity.setOnClickListener(null);
+			}
+		}
+	};
+
 	/**
 	 * Show the menu;
 	 */
 	public void toggleMenu() {
-		if(isOpened){
+		if (isOpened) {
 			closeMenu();
-		}else{
+		} else {
 			openMenu();
 		}
 	}
@@ -212,6 +230,49 @@ public class DrawerBox extends FrameLayout {
 		set.addListener(animationListener);
 		set.setTarget(viewActivity);
 		set.start();
+	}
+
+	/**
+	 * If there were some view you don't want reside menu to intercept their
+	 * touch event, you could add it to ignored views.
+	 *
+	 * @param v
+	 */
+	public void addIgnoredView(View v) {
+		ignoredViews.add(v);
+	}
+
+	/**
+	 * Remove a view from ignored views;
+	 * 
+	 * @param v
+	 */
+	public void removeIgnoredView(View v) {
+		ignoredViews.remove(v);
+	}
+
+	/**
+	 * Clear the ignored view list;
+	 */
+	public void clearIgnoredViewList() {
+		ignoredViews.clear();
+	}
+
+	/**
+	 * If the motion event was relative to the view which in ignored view
+	 * list,return true;
+	 *
+	 * @param ev
+	 * @return
+	 */
+	private boolean isInIgnoredView(MotionEvent ev) {
+		Rect rect = new Rect();
+		for (View v : ignoredViews) {
+			v.getGlobalVisibleRect(rect);
+			if (rect.contains((int) ev.getX(), (int) ev.getY()))
+				return true;
+		}
+		return false;
 	}
 
 }
