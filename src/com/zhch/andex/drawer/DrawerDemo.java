@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.zhch.andex.R;
-import com.zhch.andex.widget.drawer.DrawerBox;
+import com.zhch.andex.widget.drawerbox.DrawerBox;
 
 public class DrawerDemo extends Activity{
 

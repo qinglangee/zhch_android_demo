@@ -1,6 +1,7 @@
 #! /bin/bash
 srcDir="/home/lifeix/workspace/lifeix-pintimes-android"
 destDir=/home/lifeix/temp/d3/move
+demoDir=/home/lifeix/workspace_android/zhch_android_demo
 srcPre="src/com/lifeix/pintimes"
 
 # 建立目录, 清空内容
@@ -25,3 +26,10 @@ done
 
 # copy res
 res=()
+
+
+sed -i "s/com.lifeix.pintimes/com.zhch.andex/g" `grep "com.lifeix.pintimes" -rl $destDir`
+mv $destDir/src/com/lifeix/pintimes  $destDir/src/com/lifeix/andex
+mv $destDir/src/com/lifeix  $destDir/src/com/zhch
+
+cp -r $destDir/*  $demoDir/
