@@ -55,7 +55,7 @@ public class DrawerBox extends FrameLayout {
 
 	public DrawerBox(Context context) {
 		super(context);
-		this.setBackgroundColor(getResources().getColor(R.color.black));
+		// this.setBackgroundColor(getResources().getColor(R.color.black));
 		initViews(context);
 	}
 
@@ -111,7 +111,6 @@ public class DrawerBox extends FrameLayout {
 			pressedState = PRESSED_DOWN;
 
 			pressedX = viewActivity.getX();
-
 			break;
 
 		case MotionEvent.ACTION_MOVE:
@@ -129,7 +128,7 @@ public class DrawerBox extends FrameLayout {
 					pressedState = PRESSED_MOVE_VERTICAL;
 					break;
 				}
-				if (xOffset < -3 || xOffset > 3) {
+				if (xOffset < -25 || xOffset > 25) {
 					pressedState = PRESSED_MOVE_HORIZONTAL;
 					ev.setAction(MotionEvent.ACTION_CANCEL);
 				}
@@ -137,7 +136,12 @@ public class DrawerBox extends FrameLayout {
 				// if (currentActivityScaleX < 0.95)
 				// showScrollViewMenu(scrollViewMenu);
 
-				viewActivity.setX(pressedX + ev.getX() - lastActionDownX);
+				float targetX = pressedX + ev.getX() - lastActionDownX;
+
+				// 不允许滑到x小于0
+				if (targetX >= 0) {
+					viewActivity.setX(targetX);
+				}
 
 				lastRawX = ev.getRawX();
 				return true;
@@ -146,10 +150,8 @@ public class DrawerBox extends FrameLayout {
 			break;
 
 		case MotionEvent.ACTION_UP:
-
 			if (isInIgnoredView)
 				break;
-
 			if (pressedState != PRESSED_MOVE_HORIZONTAL)
 				break;
 
