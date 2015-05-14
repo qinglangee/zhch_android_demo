@@ -12,4 +12,18 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <!-- common -->
+    <style name="common_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <!-- image demo -->
+    <style name="common_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:contentDescription">image</item>
+    </style>
 </resources>

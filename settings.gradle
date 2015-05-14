@@ -1,2 +1,0 @@
-include ':supportv7'
-project(':supportv7').projectDir = new File(settingsDir, '../../workspace_android/appcompat_v7')

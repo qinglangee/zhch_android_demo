@@ -9,6 +9,8 @@ import android.widget.Button;
 import com.zhch.andex.activitydemo.ActionBarDemo;
 import com.zhch.andex.activitydemo.LifeCycleDemo;
 import com.zhch.andex.drawer.DrawerDemo;
+import com.zhch.andex.image.RountImageUseXml;
+import com.zhch.andex.shape.TwoRoundCorner;
 
 public class MainActivity extends Activity {
 
@@ -19,6 +21,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		button1 = (Button) findViewById(R.id.button1);
+		
+		
+		Intent intent = new Intent(this, TwoRoundCorner.class);
+		startActivity(intent);
 	}
 
 	/**
@@ -35,8 +41,16 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, ActionBarDemo.class);
 		startActivity(intent);
 	}
-	public void toActionBarDemo2(View view) {
+	public void toDrawerBoxDemo(View view) {
 		Intent intent = new Intent(this, DrawerDemo.class);
+		startActivity(intent);
+	}
+	public void toRountImageUseXml(View view) {
+		Intent intent = new Intent(this, RountImageUseXml.class);
+		startActivity(intent);
+	}
+	public void toTwoRoundCorner(View view) {
+		Intent intent = new Intent(this, TwoRoundCorner.class);
 		startActivity(intent);
 	}
 
