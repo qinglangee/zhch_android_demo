@@ -2,7 +2,7 @@ package com.zhch.andex.util.net;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
+import android.util.LruCache;
 import android.widget.ImageView;
 
 import com.android.volley.Request;
@@ -60,8 +60,27 @@ public class VolleyWrapper {
 		return mImageLoader;
 	}
 
+	/**
+	 * 加载图片
+	 * @param context
+	 * @param url
+	 * @param imageView
+	 */
 	public static void loadImage(Context context, String url, ImageView imageView) {
+		loadImage(context, url, imageView, R.drawable.ic_launcher);
+	}
+	
+	/**
+	 * 加载图片, 指定默认资源
+	 * @param context
+	 * @param url
+	 * @param imageView
+	 */
+	public static void loadImage(Context context, String url, ImageView imageView, int defaultRes) {
+		if(url == null || imageView == null){
+			return;
+		}
 		VolleyWrapper.getInstance(context).getImageLoader()
-				.get(url, ImageLoader.getImageListener(imageView, R.drawable.ic_launcher, R.drawable.ic_launcher));
+		.get(url, ImageLoader.getImageListener(imageView, defaultRes, defaultRes));
 	}
 }

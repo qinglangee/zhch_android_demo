@@ -3,100 +3,46 @@ package com.zhch.andex.util;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 
 import junit.framework.Assert;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.util.Log;
 
+/**
+ * 微信图片处理工具类
+ * 
+ * @author lifeix
+ *
+ */
 public class WechatUtil {
-	
+
 	private static final String TAG = "Wechat_Sample.Util";
-	
-	public static byte[] bmpToByteArray2(final Bitmap bmp, final boolean needRecycle) {
-		 int i;
-	        int j;
-	        if (bmp.getHeight() > bmp.getWidth()) {
-	            i = bmp.getWidth();
-	            j = bmp.getWidth();
-	        } else {
-	            i = bmp.getHeight();
-	            j = bmp.getHeight();
-	        }
-	        
-	        Bitmap localBitmap = Bitmap.createBitmap(i, j, Bitmap.Config.RGB_565);
-	        Canvas localCanvas = new Canvas(localBitmap);
-	        
-	        while (true) {
-	            localCanvas.drawBitmap(bmp, new Rect(0, 0, i, j), new Rect(0, 0,i, j), null);
-	            if (needRecycle)
-	                bmp.recycle();
-	            ByteArrayOutputStream localByteArrayOutputStream = new ByteArrayOutputStream();
-	            localBitmap.compress(Bitmap.CompressFormat.JPEG, 100,
-	                    localByteArrayOutputStream);
-	            localBitmap.recycle();
-	            byte[] arrayOfByte = localByteArrayOutputStream.toByteArray();
-	            try {
-	                localByteArrayOutputStream.close();
-	                return arrayOfByte;
-	            } catch (Exception e) {
-	                //F.out(e);
-	            }
-	            i = bmp.getHeight();
-	            j = bmp.getHeight();
-	        }
-	}
-	public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		bmp.compress(CompressFormat.PNG, 100, output);
-		if (needRecycle) {
-			bmp.recycle();
+
+	/**
+	 * 图片转换成字节
+	 * 
+	 * @param bitmap
+	 * @param needRecycle
+	 * @return
+	 */
+	public static byte[] bmpToByteArray(final Bitmap bitmap, final boolean needRecycle) {
+
+		byte[] result = WechatUtil.compress(bitmap); // 先压缩到31K以下, 否则微信报错
+
+		// 压缩完还是太大的话, 就不用图片
+		if (result.length / 1024 > 31) {
+			result = null;
 		}
-		
-		byte[] result = output.toByteArray();
-		try {
-			output.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+
 		return result;
 	}
-	
-	public static byte[] getHtmlByteArray(final String url) {
-		 URL htmlUrl = null;     
-		 InputStream inStream = null;     
-		 try {         
-			 htmlUrl = new URL(url);         
-			 URLConnection connection = htmlUrl.openConnection();         
-			 HttpURLConnection httpConnection = (HttpURLConnection)connection;         
-			 int responseCode = httpConnection.getResponseCode();         
-			 if(responseCode == HttpURLConnection.HTTP_OK){             
-				 inStream = httpConnection.getInputStream();         
-			  }     
-			 } catch (MalformedURLException e) {               
-				 e.printStackTrace();     
-			 } catch (IOException e) {              
-				e.printStackTrace();    
-		  } 
-		byte[] data = inputStreamToByte(inStream);
 
-		return data;
-	}
-	
 	public static byte[] inputStreamToByte(InputStream is) {
-		try{
+		try {
 			ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
 			int ch;
 			while ((ch = is.read()) != -1) {
@@ -105,13 +51,13 @@ public class WechatUtil {
 			byte imgdata[] = bytestream.toByteArray();
 			bytestream.close();
 			return imgdata;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
+
 	public static byte[] readFromFile(String fileName, int offset, int len) {
 		if (fileName == null) {
 			return null;
@@ -129,15 +75,15 @@ public class WechatUtil {
 
 		Log.d(TAG, "readFromFile : offset = " + offset + " len = " + len + " offset + len = " + (offset + len));
 
-		if(offset <0){
+		if (offset < 0) {
 			Log.e(TAG, "readFromFile invalid offset:" + offset);
 			return null;
 		}
-		if(len <=0 ){
+		if (len <= 0) {
 			Log.e(TAG, "readFromFile invalid len:" + len);
 			return null;
 		}
-		if(offset + len > (int) file.length()){
+		if (offset + len > (int) file.length()) {
 			Log.e(TAG, "readFromFile invalid file len:" + file.length());
 			return null;
 		}
@@ -156,8 +102,9 @@ public class WechatUtil {
 		}
 		return b;
 	}
-	
+
 	private static final int MAX_DECODE_PICTURE_SIZE = 1920 * 1440;
+
 	public static Bitmap extractThumbNail(final String path, final int height, final int width, final boolean crop) {
 		Assert.assertTrue(path != null && !path.equals("") && height > 0 && width > 0);
 
@@ -203,7 +150,8 @@ public class WechatUtil {
 
 			options.inJustDecodeBounds = false;
 
-			Log.i(TAG, "bitmap required size=" + newWidth + "x" + newHeight + ", orig=" + options.outWidth + "x" + options.outHeight + ", sample=" + options.inSampleSize);
+			Log.i(TAG, "bitmap required size=" + newWidth + "x" + newHeight + ", orig=" + options.outWidth + "x"
+					+ options.outHeight + ", sample=" + options.inSampleSize);
 			Bitmap bm = BitmapFactory.decodeFile(path, options);
 			if (bm == null) {
 				Log.e(TAG, "bitmap decode failed");
@@ -218,7 +166,8 @@ public class WechatUtil {
 			}
 
 			if (crop) {
-				final Bitmap cropped = Bitmap.createBitmap(bm, (bm.getWidth() - width) >> 1, (bm.getHeight() - height) >> 1, width, height);
+				final Bitmap cropped = Bitmap.createBitmap(bm, (bm.getWidth() - width) >> 1,
+						(bm.getHeight() - height) >> 1, width, height);
 				if (cropped == null) {
 					return bm;
 				}
@@ -236,127 +185,75 @@ public class WechatUtil {
 
 		return null;
 	}
-	
-	private Bitmap getimage(Bitmap bitmap) {
+
+	private static byte[] compress(Bitmap image) {
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+		if (baos.toByteArray().length / 1024 > 1024) {// 判断如果图片大于1M
+														// 压缩,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
+			baos.reset();// 重置baos即清空baos
+			image.compress(Bitmap.CompressFormat.JPEG, 50, baos);// 这里压缩50%，把压缩后的数据存放到baos中
+		}
+		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
 		BitmapFactory.Options newOpts = new BitmapFactory.Options();
-		
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-        //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-        float ww = 100f;//这里设置宽度为100f
-        float hh = 100f;//这里设置高度为100f
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
-        if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
-            be = (int) (w / ww);
-        } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
-            be = (int) (h / hh);
-        }
-        if (be <= 0)
-            be = 1;
-        newOpts.inSampleSize = be;//设置缩放比例
-        //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-//        bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
-        return bitmap;//压缩好比例大小后再进行质量压缩
-    }
-	
-	private Bitmap getimage2(String srcPath) {
-		BitmapFactory.Options newOpts = new BitmapFactory.Options();
-		//开始读入图片，此时把options.inJustDecodeBounds 设回true了
+		// 开始读入图片，此时把options.inJustDecodeBounds 设回true了
 		newOpts.inJustDecodeBounds = true;
-		Bitmap bitmap = BitmapFactory.decodeFile(srcPath,newOpts);//此时返回bm为空
-		
+		Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
 		newOpts.inJustDecodeBounds = false;
 		int w = newOpts.outWidth;
 		int h = newOpts.outHeight;
-		//现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-		float hh = 800f;//这里设置高度为800f
-		float ww = 480f;//这里设置宽度为480f
-		//缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-		int be = 1;//be=1表示不缩放
-		if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
+		
+		float hh = 300f;// 这里设置高度为300f
+		float ww = 300f;// 这里设置宽度为300f
+		// 缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
+		int be = 1;// be=1表示不缩放
+		if (w > h && w > ww) {// 如果宽度大的话根据宽度固定大小缩放
 			be = (int) (newOpts.outWidth / ww);
-		} else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
+		} else if (w < h && h > hh) {// 如果高度高的话根据宽度固定大小缩放
 			be = (int) (newOpts.outHeight / hh);
 		}
 		if (be <= 0)
 			be = 1;
-		newOpts.inSampleSize = be;//设置缩放比例
-		//重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-		bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
-//		return compressImage(bitmap);//压缩好比例大小后再进行质量压缩
-		return bitmap;
+		newOpts.inSampleSize = be;// 设置缩放比例
+		newOpts.inPreferredConfig = Config.RGB_565;// 降低图片从ARGB888到RGB565
+		// 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
+		isBm = new ByteArrayInputStream(baos.toByteArray());
+		bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
+		return compressImage(bitmap);// 压缩好比例大小后再进行质量压缩
 	}
-	
 
-	public static Bitmap compress(Bitmap image) {
+	/**
+	 * 按质量压缩图片
+	 * 
+	 * @param image
+	 * @return
+	 */
+	private static byte[] compressImage(Bitmap image) {
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();       
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        while( baos.toByteArray().length / 1024 > 31) {//判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出   
-            baos.reset();//重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, 50, baos);//这里压缩50%，把压缩后的数据存放到baos中
-        }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
-        BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        //开始读入图片，此时把options.inJustDecodeBounds 设回true了
-        newOpts.inJustDecodeBounds = true;
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
-        newOpts.inJustDecodeBounds = false;
-        int w = newOpts.outWidth;
-        int h = newOpts.outHeight;
-        //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-        float hh = 100f;//这里设置高度为800f
-        float ww = 100f;//这里设置宽度为480f
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
-        if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
-            be = (int) (newOpts.outWidth / ww);
-        } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
-            be = (int) (newOpts.outHeight / hh);
-        }
-        if (be <= 0)
-            be = 1;
-        newOpts.inSampleSize = be;//设置缩放比例
-        newOpts.inPreferredConfig = Config.RGB_565;//降低图片从ARGB888到RGB565
-        //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-        isBm = new ByteArrayInputStream(baos.toByteArray());
-        bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
-        return bitmap;//压缩好比例大小后再进行质量压缩
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+		int options = 100;
+		int count = 0; // 次数限制
+		while (baos.toByteArray().length / 1024 > 31 && (count++ < 8)) { // 循环判断如果压缩后图片是否大于31kb,大于继续压缩
+			baos.reset();// 重置baos即清空baos
+			options -= 10;// 每次都减少10
+			image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+
+		}
+
+      ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
+      Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
+      
+      LL.d("before: " + (baos.toByteArray().length/1024));
+//    Bitmap bmp = WechatUtil.compress(bitmap); // 先压缩到31K以下, 否则微信报错
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+    LL.d("after: " + (output.toByteArray().length/1024));
+//    if (needRecycle) {
+//        bmp.recycle();
+//    }
+      
+		return baos.toByteArray();
 	}
-	public static Bitmap comp(Bitmap image) {
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();       
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        while( baos.toByteArray().length / 1024 > 1024) {//判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出   
-            baos.reset();//重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, 50, baos);//这里压缩50%，把压缩后的数据存放到baos中
-        }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
-        BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        //开始读入图片，此时把options.inJustDecodeBounds 设回true了
-        newOpts.inJustDecodeBounds = true;
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
-        newOpts.inJustDecodeBounds = false;
-        int w = newOpts.outWidth;
-        int h = newOpts.outHeight;
-        //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
-        float hh = 100f;//这里设置高度为800f
-        float ww = 100f;//这里设置宽度为480f
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
-        if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
-            be = (int) (newOpts.outWidth / ww);
-        } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
-            be = (int) (newOpts.outHeight / hh);
-        }
-        if (be <= 0)
-            be = 1;
-        newOpts.inSampleSize = be;//设置缩放比例
-        newOpts.inPreferredConfig = Config.RGB_565;//降低图片从ARGB888到RGB565
-        //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-        isBm = new ByteArrayInputStream(baos.toByteArray());
-        bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);
-        return bitmap;//压缩好比例大小后再进行质量压缩
-    }
 }

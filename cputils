@@ -14,6 +14,13 @@ fi
 # coopy 源文件
 srcs=("widget/drawerbox/DrawerBox.java"
 "widget/drawerbox/TouchDisableView.java"
+"app/Pintimes.java"
+"user/UserService.java"
+"user/vo/User.java"
+"util"
+"constant"
+)
+src_delete=("util/FakeData.java"
 )
 for file in ${srcs[@]};do
     destFile=$destDir/$srcPre/$file
@@ -21,7 +28,12 @@ for file in ${srcs[@]};do
     if [ ! -e $temp ] ; then
         mkdir -p $temp
     fi
-    cp $srcDir/$srcPre/$file $destFile
+    cp -r $srcDir/$srcPre/$file $destFile
+done
+
+for file in ${src_delete[@]};do
+    destFile=$destDir/$srcPre/$file
+    rm $destFile
 done
 
 # copy res

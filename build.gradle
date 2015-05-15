@@ -71,6 +71,10 @@ dependencies {
     compile 'com.loopeer.android.thirdparty.pulltorefresh:Android-PullToRefresh:2.1.1'
     compile 'com.makeramen:roundedimageview:2.0.1'
     
+    compile 'org.bouncycastle:bcprov-jdk16:1.46'
+    compile 'com.google.guava:guava:18.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.0.0'
+    
     // to use appcomat: in SDK Manager install/update Extras / Android Support Repository
     // or from command line
     //	android list sdk
