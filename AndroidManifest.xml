@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
     <uses-sdk
-        android:minSdkVersion="17"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
     <!-- 访问网络 , 网络/WIFI 状态 -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -18,7 +18,7 @@
     <!-- 写文件 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
-        android:name="com.zhch.andex.app.MyApp"
+        android:name=".app.MyApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -37,10 +37,15 @@
         </activity>
         <activity android:name=".activitydemo.LifeCycleDemo" />
         <activity
-            android:name="com.zhch.andex.activitydemo.ActionBarDemo"
-            android:label="@string/title_activity_action_bar_demo" 
-            android:theme="@style/CustomActionBarTheme">
+            android:name=".activitydemo.ActionBarDemo"
+            android:label="@string/title_activity_action_bar_demo"
+            android:theme="@style/CustomActionBarTheme" >
         </activity>
         <activity android:name=".drawer.DrawerDemo" />
+        <activity android:name=".image.RountImageUseXml" />
+        <activity android:name=".image.DrawRoundImage" />
+        <activity android:name=".shape.TwoRoundCorner" />
+        <activity android:name=".customview.demo.UseCustomDrawable" />
+        <activity android:name=".customview.demo.UseCustomDrawableFromXml" />
     </application>
 </manifest>

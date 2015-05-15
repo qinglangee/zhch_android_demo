@@ -14,8 +14,7 @@ import android.widget.Button;
 import com.zhch.andex.R;
 
 /**
- * 生命周期图示
- * http://developer.android.com/training/basics/activity-lifecycle/starting.html
+ * 生命周期图示 http://developer.android.com/training/basics/activity-lifecycle/starting.html
  * 
  * @author lifeix
  *
@@ -24,7 +23,6 @@ public class LifeCycleDemo extends Activity {
 
 	Button btn1;
 	Camera mCamera;
-	
 
 	static final String STATE_SCORE = "playerScore";
 	static final String STATE_LEVEL = "playerLevel";
@@ -50,18 +48,17 @@ public class LifeCycleDemo extends Activity {
 			ActionBar actionBar = getActionBar();
 			actionBar.setHomeButtonEnabled(false);
 		}
-		
 
 		// 状态恢复
-	    // 这里的Bundle可能为空, 新建的activity没有保存的Bundle
-	    if (savedInstanceState != null) {
-	        // Restore value of members from saved state
-	        mCurrentScore = savedInstanceState.getInt(STATE_SCORE);
-	        mCurrentLevel = savedInstanceState.getInt(STATE_LEVEL);
-	    } else {
-	        // Probably initialize members with default values for a new instance
-	    }
-		
+		// 这里的Bundle可能为空, 新建的activity没有保存的Bundle
+		if (savedInstanceState != null) {
+			// Restore value of members from saved state
+			mCurrentScore = savedInstanceState.getInt(STATE_SCORE);
+			mCurrentLevel = savedInstanceState.getInt(STATE_LEVEL);
+		} else {
+			// Probably initialize members with default values for a new instance
+		}
+
 	}
 
 	/**
@@ -103,8 +100,7 @@ public class LifeCycleDemo extends Activity {
 
 	/**
 	 * onStop() 用来做 CPU 耗时的清理工作<br>
-	 * http://developer.android.com/training/basics/activity-lifecycle/stopping.
-	 * html
+	 * http://developer.android.com/training/basics/activity-lifecycle/stopping. html
 	 */
 	@Override
 	protected void onStop() {
@@ -117,12 +113,15 @@ public class LifeCycleDemo extends Activity {
 		values.put("key2", "value2");
 
 		Uri mUri = null;
-		getContentResolver().update(mUri, // The URI for the note to update.
-				values, // The map of column names and new values to apply to
-						// them.
-				null, // No SELECT criteria are used.
-				null // No WHERE columns are used.
-				);
+		if(getContentResolver() != null && mUri != null){
+			
+			getContentResolver().update(mUri, // The URI for the note to update.
+					values, // The map of column names and new values to apply to
+					// them.
+					null, // No SELECT criteria are used.
+					null // No WHERE columns are used.
+					);
+		}
 	}
 
 	/**
@@ -148,41 +147,38 @@ public class LifeCycleDemo extends Activity {
 
 	/**
 	 * onRestart() 基本上不需要用到的<br>
-	 * http://developer.android.com/training/basics/activity-lifecycle/stopping.
-	 * html
+	 * http://developer.android.com/training/basics/activity-lifecycle/stopping. html
 	 */
 	@Override
 	protected void onRestart() {
 		super.onRestart(); // Always call the superclass method first
 		// Activity being restarted from stopped state
 	}
-	
-	
 
 	/**
 	 * onSaveInstanceState() 在activity被销毁时保存额外的状态(view相关的系统会保存)
 	 */
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-	    // Save the user's current game state
-	    savedInstanceState.putInt(STATE_SCORE, mCurrentScore);
-	    savedInstanceState.putInt(STATE_LEVEL, mCurrentLevel);
-	    
-	    // Always call the superclass so it can save the view hierarchy state
-	    super.onSaveInstanceState(savedInstanceState);
+		// Save the user's current game state
+		savedInstanceState.putInt(STATE_SCORE, mCurrentScore);
+		savedInstanceState.putInt(STATE_LEVEL, mCurrentLevel);
+
+		// Always call the superclass so it can save the view hierarchy state
+		super.onSaveInstanceState(savedInstanceState);
 	}
-	
+
 	/**
 	 * 恢复保存的额外的状态
 	 */
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
-	    // Always call the superclass so it can restore the view hierarchy
-	    super.onRestoreInstanceState(savedInstanceState);
-	   
-	    // 这里的Bundle不会为空
-	    // Restore state members from saved instance
-	    mCurrentScore = savedInstanceState.getInt(STATE_SCORE);
-	    mCurrentLevel = savedInstanceState.getInt(STATE_LEVEL);
+		// Always call the superclass so it can restore the view hierarchy
+		super.onRestoreInstanceState(savedInstanceState);
+
+		// 这里的Bundle不会为空
+		// Restore state members from saved instance
+		mCurrentScore = savedInstanceState.getInt(STATE_SCORE);
+		mCurrentLevel = savedInstanceState.getInt(STATE_LEVEL);
 	}
 
 	/**
