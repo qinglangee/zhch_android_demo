@@ -37,8 +37,8 @@ public class MainActivity extends Activity {
 		};
 		addButtons();
 		
-//		Intent intent = new Intent(this, TwoRoundCorner.class);
-//		startActivity(intent);
+		Intent intent = new Intent(this, UseCustomDrawable.class);
+		startActivity(intent);
 	}
 
 
