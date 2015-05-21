@@ -56,6 +56,10 @@ public class CustomDrawableView extends View {
 	private int b(){  // bottom
 		return top() + height;
 	}
+	/**
+	 * 画圆角图片
+	 * http://www.curious-creature.com/2012/12/11/android-recipe-1-image-with-rounded-corners/
+	 */
 	private void custom() {
 
 		mDrawable = new ShapeDrawable(new OvalShape());
