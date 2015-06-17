@@ -16,6 +16,7 @@ import com.zhch.andex.customview.demo.UseCustomDrawableFromXml;
 import com.zhch.andex.drawer.DrawerDemo;
 import com.zhch.andex.image.RountImageUseXml;
 import com.zhch.andex.shape.TwoRoundCorner;
+import com.zhch.andex.widget.demo.ProTextViewDemo;
 
 public class MainActivity extends Activity {
 
@@ -34,10 +35,11 @@ public class MainActivity extends Activity {
 				,new ButtonItem(TwoRoundCorner.class)
 				,new ButtonItem(UseCustomDrawable.class)
 				,new ButtonItem(UseCustomDrawableFromXml.class)
+				,new ButtonItem(ProTextViewDemo.class)
 		};
 		addButtons();
 		
-		Intent intent = new Intent(this, UseCustomDrawable.class);
+		Intent intent = new Intent(this, ProTextViewDemo.class);
 		startActivity(intent);
 	}
 

@@ -1,7 +1,5 @@
 package com.lifeix.pintimes.push;
 
-import com.lifeix.pintimes.R;
-import com.lifeix.pintimes.app.Pintimes;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -11,6 +9,8 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.zhch.andex.R;
+import com.zhch.andex.app.Pintimes;
 
 
 /**

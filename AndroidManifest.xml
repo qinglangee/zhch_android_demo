@@ -38,8 +38,7 @@
         <activity android:name=".activitydemo.LifeCycleDemo" />
         <activity
             android:name=".activitydemo.ActionBarDemo"
-            android:label="@string/title_activity_action_bar_demo"
-            android:theme="@style/CustomActionBarTheme" >
+            android:label="@string/title_activity_action_bar_demo" >
         </activity>
         <activity android:name=".drawer.DrawerDemo" />
         <activity android:name=".image.RountImageUseXml" />
@@ -47,5 +46,6 @@
         <activity android:name=".shape.TwoRoundCorner" />
         <activity android:name=".customview.demo.UseCustomDrawable" />
         <activity android:name=".customview.demo.UseCustomDrawableFromXml" />
+        <activity android:name=".widget.demo.ProTextViewDemo" />
     </application>
 </manifest>
