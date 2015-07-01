@@ -6,7 +6,8 @@
     <color name="blue">#0000FF</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    
+    <color name="gray">#CCC</color>
+
     <!-- 应用主要颜色 -->
     <color name="app_main">#AD1B20</color>
     <color name="app_main_sel">@color/black</color>

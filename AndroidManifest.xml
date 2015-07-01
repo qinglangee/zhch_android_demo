@@ -46,6 +46,9 @@
         <activity android:name=".shape.TwoRoundCorner" />
         <activity android:name=".customview.demo.UseCustomDrawable" />
         <activity android:name=".customview.demo.UseCustomDrawableFromXml" />
+        <activity android:name=".customview.demo.UseCircleProgressBar" />
         <activity android:name=".widget.demo.ProTextViewDemo" />
+        <activity android:name=".http.demo.UseAsynHttpClient" />
+        <activity android:name=".media.TakePhotoDemo" />
     </application>
 </manifest>

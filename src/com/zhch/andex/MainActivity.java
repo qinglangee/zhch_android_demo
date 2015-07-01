@@ -11,10 +11,13 @@ import android.widget.LinearLayout;
 
 import com.zhch.andex.activitydemo.ActionBarDemo;
 import com.zhch.andex.activitydemo.LifeCycleDemo;
+import com.zhch.andex.customview.demo.UseCircleProgressBar;
 import com.zhch.andex.customview.demo.UseCustomDrawable;
 import com.zhch.andex.customview.demo.UseCustomDrawableFromXml;
 import com.zhch.andex.drawer.DrawerDemo;
+import com.zhch.andex.http.demo.UseAsynHttpClient;
 import com.zhch.andex.image.RountImageUseXml;
+import com.zhch.andex.media.TakePhotoDemo;
 import com.zhch.andex.shape.TwoRoundCorner;
 import com.zhch.andex.widget.demo.ProTextViewDemo;
 
@@ -36,10 +39,13 @@ public class MainActivity extends Activity {
 				,new ButtonItem(UseCustomDrawable.class)
 				,new ButtonItem(UseCustomDrawableFromXml.class)
 				,new ButtonItem(ProTextViewDemo.class)
+				,new ButtonItem(UseCircleProgressBar.class)
+				,new ButtonItem(UseAsynHttpClient.class, "AsynHttp 示例")
+				,new ButtonItem(TakePhotoDemo.class, "照片／拍照")
 		};
 		addButtons();
 		
-		Intent intent = new Intent(this, ProTextViewDemo.class);
+		Intent intent = new Intent(this, TakePhotoDemo.class);
 		startActivity(intent);
 	}
 
