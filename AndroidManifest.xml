@@ -50,5 +50,8 @@
         <activity android:name=".widget.demo.ProTextViewDemo" />
         <activity android:name=".http.demo.UseAsynHttpClient" />
         <activity android:name=".media.TakePhotoDemo" />
+        <activity android:name=".animation.BasicPropertyAnimation" />
+        <activity android:name=".dialog.DialogDemo" />
+        <activity android:name=".database.sqlite.SqliteDemo" />
     </application>
 </manifest>

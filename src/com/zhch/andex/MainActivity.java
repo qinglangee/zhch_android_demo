@@ -11,9 +11,12 @@ import android.widget.LinearLayout;
 
 import com.zhch.andex.activitydemo.ActionBarDemo;
 import com.zhch.andex.activitydemo.LifeCycleDemo;
+import com.zhch.andex.animation.BasicPropertyAnimation;
 import com.zhch.andex.customview.demo.UseCircleProgressBar;
 import com.zhch.andex.customview.demo.UseCustomDrawable;
 import com.zhch.andex.customview.demo.UseCustomDrawableFromXml;
+import com.zhch.andex.database.sqlite.SqliteDemo;
+import com.zhch.andex.dialog.DialogDemo;
 import com.zhch.andex.drawer.DrawerDemo;
 import com.zhch.andex.http.demo.UseAsynHttpClient;
 import com.zhch.andex.image.RountImageUseXml;
@@ -42,10 +45,13 @@ public class MainActivity extends Activity {
 				,new ButtonItem(UseCircleProgressBar.class)
 				,new ButtonItem(UseAsynHttpClient.class, "AsynHttp 示例")
 				,new ButtonItem(TakePhotoDemo.class, "照片／拍照")
+				,new ButtonItem(BasicPropertyAnimation.class, "属性动画")
+				,new ButtonItem(DialogDemo.class, "对话框")
+				,new ButtonItem(SqliteDemo.class, "原生数据库操作")
 		};
 		addButtons();
 		
-		Intent intent = new Intent(this, TakePhotoDemo.class);
+		Intent intent = new Intent(this, SqliteDemo.class);
 		startActivity(intent);
 	}
 
