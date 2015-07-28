@@ -1,6 +1,5 @@
 package com.zhch.andex;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 import com.zhch.andex.activitydemo.ActionBarDemo;
 import com.zhch.andex.activitydemo.LifeCycleDemo;
 import com.zhch.andex.animation.BasicPropertyAnimation;
+import com.zhch.andex.common.activity.BaseAct;
 import com.zhch.andex.customview.demo.UseCircleProgressBar;
 import com.zhch.andex.customview.demo.UseCustomDrawable;
 import com.zhch.andex.customview.demo.UseCustomDrawableFromXml;
@@ -19,12 +19,14 @@ import com.zhch.andex.database.sqlite.SqliteDemo;
 import com.zhch.andex.dialog.DialogDemo;
 import com.zhch.andex.drawer.DrawerDemo;
 import com.zhch.andex.http.demo.UseAsynHttpClient;
-import com.zhch.andex.image.RountImageUseXml;
+import com.zhch.andex.image.FrescoSimpleDemo;
+import com.zhch.andex.image.RountImageUseXmlDemo;
 import com.zhch.andex.media.TakePhotoDemo;
 import com.zhch.andex.shape.TwoRoundCorner;
+import com.zhch.andex.system.SystemDataDemo;
 import com.zhch.andex.widget.demo.ProTextViewDemo;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseAct {
 
 	LinearLayout mButtonBox;
 	ButtonItem[] items;
@@ -36,22 +38,24 @@ public class MainActivity extends Activity {
 		items = new ButtonItem[]{
 				new ButtonItem(LifeCycleDemo.class, "生命周期")
 				,new ButtonItem(ActionBarDemo.class)
-				,new ButtonItem(DrawerDemo.class)
-				,new ButtonItem(RountImageUseXml.class)
-				,new ButtonItem(TwoRoundCorner.class)
-				,new ButtonItem(UseCustomDrawable.class)
+				,new ButtonItem(DrawerDemo.class, "抽屉菜单")
+				,new ButtonItem(RountImageUseXmlDemo.class, "用xml画圆角图片")
+				,new ButtonItem(TwoRoundCorner.class, "两个圆角")
+				,new ButtonItem(UseCustomDrawable.class, "自定义Drawable")
 				,new ButtonItem(UseCustomDrawableFromXml.class)
-				,new ButtonItem(ProTextViewDemo.class)
-				,new ButtonItem(UseCircleProgressBar.class)
+				,new ButtonItem(ProTextViewDemo.class, "加强型Text")
+				,new ButtonItem(UseCircleProgressBar.class, "圆形进度条")
 				,new ButtonItem(UseAsynHttpClient.class, "AsynHttp 示例")
 				,new ButtonItem(TakePhotoDemo.class, "照片／拍照")
 				,new ButtonItem(BasicPropertyAnimation.class, "属性动画")
 				,new ButtonItem(DialogDemo.class, "对话框")
 				,new ButtonItem(SqliteDemo.class, "原生数据库操作")
+				,new ButtonItem(SystemDataDemo.class, "系统数据")
+				,new ButtonItem(FrescoSimpleDemo.class, "Fresco图片加载")
 		};
 		addButtons();
 		
-		Intent intent = new Intent(this, SqliteDemo.class);
+		Intent intent = new Intent(this, FrescoSimpleDemo.class);
 		startActivity(intent);
 	}
 

@@ -7,8 +7,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import com.zhch.andex.R;
+import com.zhch.andex.common.activity.BaseAct;
 
-public class ActionBarDemo extends Activity {
+public class ActionBarDemo extends BaseAct {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

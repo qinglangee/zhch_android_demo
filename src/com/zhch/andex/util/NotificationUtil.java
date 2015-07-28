@@ -10,7 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.zhch.andex.R;
-import com.zhch.andex.app.Pintimes;
+import com.zhch.andex.app.MyApp;
 
 
 /**
@@ -31,7 +31,7 @@ public class NotificationUtil {
 
     public static final String getString(int id) {
         
-        return Pintimes.getInstance().getString(id);
+        return MyApp.getInstance().getString(id);
     }
 
     /**
@@ -43,17 +43,17 @@ public class NotificationUtil {
      */
     public static final void showNotification(int id, int icon, String title, String content) {
         
-        if (Pintimes.getInstance() == null){
+        if (MyApp.getInstance() == null){
             
             return;
         }
-        NotificationManager notificationManager = (NotificationManager) Pintimes.getInstance().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) MyApp.getInstance().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         String contentTitle = "独家";
         Intent notificationIntent = new Intent();
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent contentIntent = PendingIntent.getActivity(Pintimes.getInstance(), 0, notificationIntent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(MyApp.getInstance(), 0, notificationIntent, 0);
         
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(Pintimes.getInstance());
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MyApp.getInstance());
         builder.setContentTitle(contentTitle);
         builder.setContentText(content);
         builder.setContentIntent(contentIntent);
@@ -70,7 +70,7 @@ public class NotificationUtil {
 //      Notification notification = new Notification(icon, title, System.currentTimeMillis());
 //      notification.flags |= Notification.FLAG_INSISTENT;
 //      notification.defaults |= Notification.DEFAULT_LIGHTS;
-//      notification.setLatestEventInfo(Pintimes.getInstance(), contentTitle, content, contentIntent);
+//      notification.setLatestEventInfo(MyApp.getInstance(), contentTitle, content, contentIntent);
         // 显示这个notification
         notificationManager.notify(id, notification);
     }
@@ -78,12 +78,12 @@ public class NotificationUtil {
      * 显示指定notification并可跳转到指定activity
      * */
     public static final void showNotification(int id,int icon,String title,String content,Intent intent){
-        NotificationManager manager = (NotificationManager) Pintimes.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
-        PendingIntent contentIntent = PendingIntent.getActivity(Pintimes.getInstance(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationManager manager = (NotificationManager) MyApp.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
+        PendingIntent contentIntent = PendingIntent.getActivity(MyApp.getInstance(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new Notification(icon,title,System.currentTimeMillis());
         notification.flags = Notification.DEFAULT_VIBRATE|Notification.FLAG_AUTO_CANCEL;
         notification.defaults = Notification.DEFAULT_LIGHTS;
-        notification.setLatestEventInfo(Pintimes.getInstance(), title, content, contentIntent);
+        notification.setLatestEventInfo(MyApp.getInstance(), title, content, contentIntent);
         manager.notify(id, notification);
     }
     /**
@@ -92,11 +92,11 @@ public class NotificationUtil {
      */
     public static final void clearNotification(int id) {
         
-        if (Pintimes.getInstance() == null){
+        if (MyApp.getInstance() == null){
             
             return;
         }
-        NotificationManager notificationManager = (NotificationManager) Pintimes.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) MyApp.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
         if (CANCLE_ALL != id){
             
             notificationManager.cancel(id);
@@ -111,11 +111,11 @@ public class NotificationUtil {
      */
     public static void clearNotifications() {
         
-        if (Pintimes.getInstance() == null){
+        if (MyApp.getInstance() == null){
             
             return;
         }
-        NotificationManager notificationManager = (NotificationManager) Pintimes.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) MyApp.getInstance().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(chat_id);
         notificationManager.cancel(follow_id);
         notificationManager.cancel(request_id);
@@ -127,9 +127,9 @@ public class NotificationUtil {
         String contentTitle = "独家";
         Intent notificationIntent = new Intent();
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent contentIntent = PendingIntent.getActivity(Pintimes.getInstance(), 0, notificationIntent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(MyApp.getInstance(), 0, notificationIntent, 0);
         
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(Pintimes.getInstance().getApplicationContext());
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MyApp.getInstance().getApplicationContext());
         builder.setContentTitle(contentTitle);
         builder.setContentText(content);
         builder.setContentIntent(contentIntent);
@@ -145,8 +145,8 @@ public class NotificationUtil {
     public static void showNotify(final int id, String title, String content, PendingIntent pIntent) {
         Log.d("blocker", "showNotify: " + title);
         
-        final NotificationManager nManager = (NotificationManager)Pintimes.getInstance().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(Pintimes.getInstance().getApplicationContext());
+        final NotificationManager nManager = (NotificationManager)MyApp.getInstance().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(MyApp.getInstance().getApplicationContext());
         
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle(title);
@@ -160,10 +160,10 @@ public class NotificationUtil {
     }
     
     public static void clearNotify(int id) {
-        if (Pintimes.getInstance() == null) {
+        if (MyApp.getInstance() == null) {
             return;
         }
-        NotificationManager nManager = (NotificationManager)Pintimes.getInstance().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager nManager = (NotificationManager) MyApp.getInstance().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         nManager.cancel(id);
     }
 }

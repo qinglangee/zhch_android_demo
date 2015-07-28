@@ -9,33 +9,34 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
-public class ArrayAdapter<T> extends BaseAdapter {
+public class CustomAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mData;
     protected boolean mDataValid;
     protected Integer layoutResId;
 
-    public ArrayAdapter(Context context, int layoutResId) {
+    public CustomAdapter(Context context, int layoutResId) {
         this(context);
         this.layoutResId = layoutResId;
     }
-    
-    public ArrayAdapter(Context context) {
-    	mContext = context;
-    	mDataValid = false;
+
+    public CustomAdapter(Context context) {
+        mContext = context;
+        mDataValid = false;
     }
-    
+
     /**
-     * 添加数据 
+     * 添加数据
+     *
      * @param data
      */
-    public void addAll(List<T> data){
+    public void addAll(List<T> data) {
         if (data != null) {
             mDataValid = true;
-            if(mData != null){
-            	mData.addAll(data);
-            }else{
-            	mData = data;
+            if (mData != null) {
+                mData.addAll(data);
+            } else {
+                mData = data;
             }
             notifyDataSetChanged();
         } else {
@@ -86,7 +87,7 @@ public class ArrayAdapter<T> extends BaseAdapter {
         }
     }
 
-	@Override
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (!mDataValid) {
             throw new IllegalStateException("this should only be called when the data is valid");
@@ -105,16 +106,16 @@ public class ArrayAdapter<T> extends BaseAdapter {
         return v;
     }
 
-    public  View newView(Context context, T data, ViewGroup parent, int type){
-    	if(layoutResId != null){
-    		View view = LayoutInflater.from(context).inflate(layoutResId, null);
-    		return view;
-    	}
-    	return null;
+    public View newView(Context context, T data, ViewGroup parent, int type) {
+        if (layoutResId != null) {
+            View view = LayoutInflater.from(context).inflate(layoutResId, null);
+            return view;
+        }
+        return null;
     }
 
-    public  void bindView(View view, int position, T data){
-    	if (data == null)
+    public void bindView(View view, int position, T data) {
+        if (data == null)
             return;
     }
 }

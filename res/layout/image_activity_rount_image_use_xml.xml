@@ -10,7 +10,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.zhch.andex.image.RountImageUseXml" >
+        tools:context="com.zhch.andex.image.RountImageUseXmlDemo" >
         <TextView
             style="@style/common_text"
             android:text="只是shape round" />

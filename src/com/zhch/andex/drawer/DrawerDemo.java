@@ -6,9 +6,10 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.zhch.andex.R;
+import com.zhch.andex.common.activity.BaseAct;
 import com.zhch.andex.widget.drawerbox.DrawerBox;
 
-public class DrawerDemo extends Activity{
+public class DrawerDemo extends BaseAct{
 
 	DrawerBox drawer;
 	@Override

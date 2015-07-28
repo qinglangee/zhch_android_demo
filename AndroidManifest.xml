@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 写文件 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
         android:name=".app.MyApp"
         android:allowBackup="true"
@@ -41,8 +42,7 @@
             android:label="@string/title_activity_action_bar_demo" >
         </activity>
         <activity android:name=".drawer.DrawerDemo" />
-        <activity android:name=".image.RountImageUseXml" />
-        <activity android:name=".image.DrawRoundImage" />
+        <activity android:name=".image.RountImageUseXmlDemo" />
         <activity android:name=".shape.TwoRoundCorner" />
         <activity android:name=".customview.demo.UseCustomDrawable" />
         <activity android:name=".customview.demo.UseCustomDrawableFromXml" />
@@ -53,5 +53,7 @@
         <activity android:name=".animation.BasicPropertyAnimation" />
         <activity android:name=".dialog.DialogDemo" />
         <activity android:name=".database.sqlite.SqliteDemo" />
+        <activity android:name=".system.SystemDataDemo" />
+        <activity android:name=".image.FrescoSimpleDemo" />
     </application>
 </manifest>

@@ -3,9 +3,10 @@ package com.zhch.andex.customview.demo;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.zhch.andex.common.activity.BaseAct;
 import com.zhch.andex.customview.CustomDrawableView;
 
-public class UseCustomDrawableFromXml extends Activity{
+public class UseCustomDrawableFromXml extends BaseAct{
 
 	CustomDrawableView mCustomDrawableView;
 

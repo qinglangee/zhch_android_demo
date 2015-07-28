@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zhch.andex.R;
-import com.zhch.andex.adapter.ArrayAdapter;
+import com.zhch.andex.adapter.CustomAdapter;
 
-public class MediaSimpleAdapter extends ArrayAdapter<MediaSimple> {
+public class MediaSimpleAdapter extends CustomAdapter<MediaSimple> {
 
 	public MediaSimpleAdapter(Context context) {
 		super(context);

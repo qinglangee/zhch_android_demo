@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.zhch.andex.R;
+import com.zhch.andex.common.activity.BaseAct;
 
 /**
  * 生命周期图示 http://developer.android.com/training/basics/activity-lifecycle/starting.html
@@ -19,7 +20,7 @@ import com.zhch.andex.R;
  * @author lifeix
  *
  */
-public class LifeCycleDemo extends Activity {
+public class LifeCycleDemo extends BaseAct {
 
 	Button btn1;
 	Camera mCamera;

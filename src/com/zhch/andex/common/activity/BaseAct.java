@@ -18,6 +18,11 @@ public class BaseAct extends Activity{
         return this;
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTitle(this.getClass().getSimpleName());
+    }
 
     @Override
     protected void onPause() {
@@ -45,5 +50,7 @@ public class BaseAct extends Activity{
         }
         toast.show();
     }
+
+
 
 }

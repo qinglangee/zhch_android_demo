@@ -15,7 +15,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.zhch.andex.R;
-import com.zhch.andex.app.Pintimes;
+import com.zhch.andex.app.MyApp;
 import com.zhch.andex.user.UserService;
 import com.zhch.andex.user.vo.User;
 import com.zhch.andex.util.CipherUtil;
@@ -72,7 +72,7 @@ public class NetUtil {
 	 * @return
 	 */
 	public static String createUserAuth() {
-		Pintimes pin = Pintimes.getInstance();
+		MyApp pin = MyApp.getInstance();
 		User user = UserService.getLoginUser();
 		if (user == null) {
 			return null;
@@ -95,7 +95,7 @@ public class NetUtil {
 		try {
 			basecode = new String(Base64.encode((authName + ":" + authPass).getBytes(), Base64.NO_WRAP), "ASCII");
 		} catch (UnsupportedEncodingException e) {
-			Log.e(Pintimes.getInstance().getPackageName(), e.getMessage());
+			Log.e(MyApp.getInstance().getPackageName(), e.getMessage());
 		}
 		authentication = "Basic " + basecode;
 

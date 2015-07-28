@@ -3,6 +3,8 @@ package com.zhch.andex.app;
 import android.app.Application;
 import android.telephony.TelephonyManager;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 
 public class MyApp  extends Application {
 	private static MyApp s_instance;
@@ -17,7 +19,8 @@ public class MyApp  extends Application {
 	public void onCreate() {
 		super.onCreate();
 		s_instance = this;
-		
+
+		Fresco.initialize(this);
 	}
 
 	/**

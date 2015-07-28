@@ -2,7 +2,7 @@ package com.zhch.andex.user;
 
 import android.util.Log;
 
-import com.zhch.andex.app.Pintimes;
+import com.zhch.andex.app.MyApp;
 import com.zhch.andex.user.vo.User;
 import com.zhch.andex.util.GsonUtils;
 import com.zhch.andex.util.PreferencesUtils;
@@ -16,7 +16,7 @@ public class UserService {
 	 * @return
 	 */
 	public static User getLoginUser() {
-		String userStr = PreferencesUtils.getString(Pintimes.getInstance(), LOGIN_USER);
+		String userStr = PreferencesUtils.getString(MyApp.getInstance(), LOGIN_USER);
 		if (userStr == null) {
 			return null;
 		}
@@ -38,6 +38,6 @@ public class UserService {
 		if (user != null) {
 			userStr = GsonUtils.toJson(user);
 		}
-		PreferencesUtils.putString(Pintimes.getInstance(), LOGIN_USER, userStr);
+		PreferencesUtils.putString(MyApp.getInstance(), LOGIN_USER, userStr);
 	}
 }

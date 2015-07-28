@@ -29,8 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="年龄" />
-
-            <Button
+t            <Button
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,6 +59,20 @@
                 android:layout_height="wrap_content"
                 android:text="清除输出"
                 android:onClick="onClearClick" />
+
+
+            <Button
+                android:id="@+id/abcd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <Button
+                android:id="@+id/sdfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
 
         </LinearLayout>
 

@@ -4,10 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.zhch.andex.R;
+import com.zhch.andex.common.activity.BaseAct;
 import com.zhch.andex.customview.CircleProgressBar;
 import com.zhch.andex.customview.CustomDrawableView;
 
-public class UseCircleProgressBar extends Activity {
+public class UseCircleProgressBar extends BaseAct {
 
     CircleProgressBar progressBar;
 

@@ -1,12 +1,5 @@
 package com.zhch.andex.util.net;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.protocol.HTTP;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -17,10 +10,16 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.JsonSyntaxException;
-import com.zhch.andex.app.Pintimes;
+import com.zhch.andex.app.MyApp;
 import com.zhch.andex.constant.Api;
 import com.zhch.andex.util.GsonUtils;
-import com.zhch.andex.util.LL;
+
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.protocol.HTTP;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GsonRequest<T> extends Request<T> {
 	private Class<T> clazz;
@@ -42,7 +41,7 @@ public class GsonRequest<T> extends Request<T> {
 	/**
 	 * Make a GET request and return a parsed object from JSON.
 	 *
-	 * @param url
+	 * @param api
 	 *            URL of the request to make
 	 * @param clazz
 	 *            Relevant class object, for Gson's reflection
@@ -64,7 +63,7 @@ public class GsonRequest<T> extends Request<T> {
 		if (params == null) {
 			params = new HashMap<String, String>();
 		}
-		params.put("device_id", Pintimes.getInstance().getDeviceId());
+		params.put("device_id", MyApp.getInstance().getDeviceId());
 		if (needAuth) {
 			if (headers == null) {
 				headers = new HashMap<String, String>();
