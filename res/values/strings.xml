@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">zhch-android-example</string>
+    <string name="app_name">ZcDemo</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
@@ -11,9 +11,6 @@
     <string name="nothing_holder">nothing_holder</string>
     <string name="title_activity_action_bar_demo">ActionBarDemo</string>
     <string name="hello_world">Hello world!</string>
-    <string name="act_action_bar_menu1">菜单01</string>
-    <string name="act_action_bar_menu2">菜单02</string>
-    <string name="act_action_bar_title">Act示例</string>
     <string name="title_activity_rount_image_use_xml">RountImageUseXml</string>
 
     <string-array name="baidu_img_types">

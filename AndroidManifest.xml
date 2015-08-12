@@ -37,9 +37,11 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
         <activity android:name=".activitydemo.LifeCycleDemo" />
+        <activity android:name=".activitydemo.KilledActivityDemo" />
         <activity
             android:name=".activitydemo.ActionBarDemo"
-            android:label="@string/title_activity_action_bar_demo" >
+            android:label="@string/title_activity_action_bar_demo"
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity android:name=".drawer.DrawerDemo" />
         <activity android:name=".image.RountImageUseXmlDemo" />
@@ -55,5 +57,13 @@
         <activity android:name=".database.sqlite.SqliteDemo" />
         <activity android:name=".system.SystemDataDemo" />
         <activity android:name=".image.FrescoSimpleDemo" />
+        <activity android:name=".syswidget.SpinnerDemo" />
+        <activity android:name=".syswidget.TabHostDemo" />
+        <activity android:name=".syswidget.ActionBarTabDemo" />
+        <activity android:name=".syswidget.SmallButtonsDemo" />
+        <activity android:name=".sensor.AccelerateSensorDemo" />
+        <activity android:name=".sensor.MagneticSensorDemo" />
+        <activity android:name=".sensor.GravitySensorDemo" />
+        <activity android:name=".sensor.LightSensorDemo" />
     </application>
 </manifest>

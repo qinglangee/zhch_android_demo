@@ -8,7 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
+import com.zhch.andex.util.PreferencesUtils;
+
 public class BaseAct extends Activity{
+
+    public static final String CURRENT_ACTIVITY = "CURRENT_ACTIVITY";
 
 
     private Toast toast;
@@ -22,6 +26,12 @@ public class BaseAct extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(this.getClass().getSimpleName());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        PreferencesUtils.putString(this, CURRENT_ACTIVITY, this.getClass().getName());
     }
 
     @Override

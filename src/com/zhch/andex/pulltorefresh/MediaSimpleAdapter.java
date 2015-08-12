@@ -22,7 +22,13 @@ public class MediaSimpleAdapter extends CustomAdapter<MediaSimple> {
 		return item;
 	}
 
-	@Override
+    @Override
+    protected void initViewField(View v) {
+
+    }
+
+
+    @Override
 	public void bindView(View view, int position, MediaSimple data) {
 		if (data == null)
 			return;

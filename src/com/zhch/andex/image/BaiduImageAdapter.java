@@ -13,15 +13,27 @@ import com.zhch.andex.image.vo.BaiduImage;
  * Created by zhch on 15-7-27.
  */
 public class BaiduImageAdapter extends CustomAdapter<BaiduImage> {
+
     public BaiduImageAdapter(Context context, int layoutResId) {
         super(context, layoutResId);
     }
 
     @Override
+    protected void initViewField(View view) {
+        ViewHolder holder = new ViewHolder();
+        holder.image = (SimpleDraweeView)view.findViewById(R.id.image);
+        view.setTag(holder);
+    }
+
+    @Override
     public void bindView(View view, int position, BaiduImage data) {
-        SimpleDraweeView image = (SimpleDraweeView)view.findViewById(R.id.image);
+        ViewHolder holder = (ViewHolder)view.getTag();
         if(data.thumbURL != null){
-            image.setImageURI(Uri.parse(data.thumbURL));
+            holder.image.setImageURI(Uri.parse(data.thumbURL));
         }
+    }
+
+    static class ViewHolder {
+        SimpleDraweeView image;
     }
 }

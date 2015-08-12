@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
-public class CustomAdapter<T> extends BaseAdapter {
+public abstract class CustomAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mData;
     protected boolean mDataValid;
     protected Integer layoutResId;
 
-    public CustomAdapter(Context context, int layoutResId) {
+    public CustomAdapter(Context context, Integer layoutResId) {
         this(context);
         this.layoutResId = layoutResId;
     }
@@ -99,6 +99,7 @@ public class CustomAdapter<T> extends BaseAdapter {
         View v;
         if (convertView == null) {
             v = newView(mContext, data, parent, getItemViewType(position));
+            initViewField(v);
         } else {
             v = convertView;
         }
@@ -111,11 +112,27 @@ public class CustomAdapter<T> extends BaseAdapter {
             View view = LayoutInflater.from(context).inflate(layoutResId, null);
             return view;
         }
+        return createNewView();
+    }
+
+    /**
+     * 没有 layout_res 的可以用这个方法创建 view
+     * @return
+     */
+    protected View createNewView() {
         return null;
     }
 
-    public void bindView(View view, int position, T data) {
-        if (data == null)
-            return;
-    }
+    /**
+     * 初始化要设置的子 view 变量
+     */
+    protected abstract void initViewField(View v);
+
+    /**
+     * 数据与 view 绑定,显示
+     * @param view
+     * @param position
+     * @param data
+     */
+    protected abstract void bindView(View view, int position, T data);
 }
